@@ -20,7 +20,7 @@ app.post("/api/login", (req, res) => {
   // Mock user
   const user = { id: 1, username: "user", email: "user@mail.com" };
 
-  jwt.sign({ user }, "secretkey", (err, token) => {
+  jwt.sign({ user }, "secretkey", { expiresIn: "30s" }, (err, token) => {
     res.json({ token });
   });
 });
