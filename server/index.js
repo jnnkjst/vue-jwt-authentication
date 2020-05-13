@@ -1,7 +1,11 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 app.get("/api", (req, res) => {
   res.json({});
@@ -17,12 +21,18 @@ app.post("/api/posts", verifyToken, (req, res) => {
 });
 
 app.post("/api/login", (req, res) => {
-  // Mock user
-  const user = { id: 1, username: "user", email: "user@mail.com" };
-
-  jwt.sign({ user }, "secretkey", { expiresIn: "30s" }, (err, token) => {
-    res.json({ token });
-  });
+  if (req.body.token === "123") {
+    jwt.sign(
+      { token: req.body.token },
+      "secretkey",
+      { expiresIn: "30s" },
+      (err, token) => {
+        res.json({ token });
+      }
+    );
+  } else {
+    res.status(422).json({ msg: "wrong token" });
+  }
 });
 
 // FORMAT OF TOKEN
