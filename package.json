@@ -1,0 +1,11 @@
+{
+  "name": "vue-jwt-authentication",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "server": "cd server && yarn dev",
+    "client": "cd client && yarn serve"
+  },
+  "author": "",
+  "license": "MIT"
+}
